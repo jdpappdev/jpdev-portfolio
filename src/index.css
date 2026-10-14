@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0B0C10;
+  --color-surface: #1F2833;
+  --color-text: #C5C6C7;
+  --color-accent: #66FCF1;
+  --color-accent-2: #45A29E;
+
+  --font-condensed: 'Barlow Condensed', sans-serif;
+  --font-sans: 'Barlow', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+:root {
+  --bg: #0B0C10;
+  --surface: #1F2833;
+  --text: #C5C6C7;
+  --accent: #66FCF1;
+  --accent-2: #45A29E;
+  --border-subtle: rgba(197, 198, 199, 0.12);
+  --radius: 6px;
+  color-scheme: dark;
+}
+
+html {
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* Hero-only atmospheric background composite with edge fade mask */
+.hero-atmosphere {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
+}
+
+/* Atmospheric silhouette image layer (mobile-first <200KB, desktop on md+) */
+.hero-silhouette-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.32;
+  background-image: url('/src/assets/images/hero_silhouette_mobile.jpg');
+}
+
+@media (min-width: 768px) {
+  .hero-silhouette-layer {
+    background-image: url('/src/assets/images/hero_silhouette_desktop.jpg');
+  }
+}
+
+/* Dark gradient overlay on top: linear-gradient(to bottom, rgba(11,12,16,0.6), var(--bg) 95%) */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(11, 12, 16, 0.6), var(--bg) 95%);
+}
+
+/* Faint 48px grid at ~4% opacity over the image */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(197, 198, 199, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(197, 198, 199, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+/* Soft radial glow behind the hero headline */
+.hero-glow {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(800px, 90vw);
+  height: min(450px, 60vh);
+  background: radial-gradient(ellipse at center, rgba(102, 252, 241, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Consistent subtle card border & 6px radius */
+.card-surface {
+  background-color: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.card-surface:hover,
+.card-surface:focus-within {
+  border-color: var(--accent-2);
+}
+
+/* Visible focus outline adhering to WCAG AA and token rules */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* Ensure min 44px touch targets */
+.touch-target {
+  min-height: 44px;
+  min-width: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
