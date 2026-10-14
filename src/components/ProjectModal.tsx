@@ -82,7 +82,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       {/* Outer dialog panel - keeps the single border */}
       <div
         ref={modalRef}
-        className="relative w-full max-w-3xl rounded-[6px] border border-[rgba(197,198,199,0.12)] bg-[#1F2833] text-[#C5C6C7] shadow-2xl p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto focus-ring"
+        className="relative w-full max-w-3xl rounded-[24px] border border-[rgba(197,198,199,0.12)] bg-[#1F2833] text-[#C5C6C7] shadow-[var(--shadow-3)] p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto focus-ring"
       >
         {/* Header bar */}
         <div className="flex items-start justify-between border-b border-[rgba(197,198,199,0.12)] pb-4 mb-6 sm:mb-8">
@@ -102,7 +102,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           <button
             ref={closeButtonRef}
             onClick={onClose}
-            className="touch-target min-w-[44px] min-h-[44px] flex items-center justify-center rounded-[6px] text-[#C5C6C7] hover:text-[#66FCF1] hover:bg-[#0B0C10] transition-colors focus-ring focus-visible:outline-2 focus-visible:outline-[#66FCF1]"
+            className="touch-target min-w-[44px] min-h-[44px] flex items-center justify-center rounded-[12px] text-[#C5C6C7] hover:text-[#66FCF1] hover:bg-[#0B0C10] transition-colors focus-ring focus-visible:outline-2 focus-visible:outline-[#66FCF1] cursor-pointer"
             aria-label="Close project details"
           >
             <X className="w-5 h-5" />
@@ -225,14 +225,14 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             <a
               href="#contact"
               onClick={onClose}
-              className="touch-target inline-flex items-center gap-2 px-5 py-2.5 rounded-[6px] bg-[#66FCF1] text-[#0B0C10] font-['Barlow'] font-semibold text-sm hover:bg-[#66FCF1]/90 transition-colors focus-ring"
+              className="touch-target inline-flex items-center gap-2 px-5 py-2.5 rounded-[12px] bg-[#66FCF1] text-[#0B0C10] font-['Barlow'] font-semibold text-sm hover:bg-[#66FCF1]/90 transition-colors focus-ring"
             >
               <span>Discuss Similar Project</span>
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </a>
             <button
               onClick={onClose}
-              className="touch-target px-4 py-2.5 rounded-[6px] border border-[rgba(197,198,199,0.12)] text-[#C5C6C7] font-['Barlow'] text-sm hover:bg-[#0B0C10] hover:text-white transition-colors focus-ring"
+              className="touch-target px-4 py-2.5 rounded-[12px] border border-[rgba(197,198,199,0.12)] text-[#C5C6C7] font-['Barlow'] text-sm hover:bg-[#0B0C10] hover:text-white transition-colors focus-ring cursor-pointer"
             >
               Close
             </button>

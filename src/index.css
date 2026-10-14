@@ -7,6 +7,11 @@
   --color-accent: #66FCF1;
   --color-accent-2: #45A29E;
 
+  --color-layer-0: #0B0C10;
+  --color-layer-1: #10141B;
+  --color-layer-2: #1F2833;
+  --color-layer-3: #283443;
+
   --font-condensed: 'Barlow Condensed', sans-serif;
   --font-sans: 'Barlow', system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
@@ -18,13 +23,27 @@
   --text: #C5C6C7;
   --accent: #66FCF1;
   --accent-2: #45A29E;
-  --border-subtle: rgba(197, 198, 199, 0.12);
+  --border-subtle: rgba(197, 198, 199, 0.10);
   --radius: 6px;
+
+  /* Depth Layer tokens derived from palette */
+  --layer-0: #0B0C10; /* page */
+  --layer-1: #10141B; /* sections */
+  --layer-2: #1F2833; /* cards */
+  --layer-3: #283443; /* floating: media, chips, hovered cards */
+
+  /* Elevation and Shadow tokens */
+  --edge: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --shadow-1: var(--edge), 0 6px 16px rgba(0, 0, 0, 0.35);
+  --shadow-2: var(--edge), 0 14px 36px rgba(0, 0, 0, 0.45), 0 2px 6px rgba(0, 0, 0, 0.4);
+  --shadow-3: var(--edge), 0 32px 80px rgba(0, 0, 0, 0.6), 0 0 60px rgba(102, 252, 241, 0.08);
+  --glow-accent: 0 0 0 1px rgba(102, 252, 241, 0.35), 0 0 32px rgba(102, 252, 241, 0.18);
+
   color-scheme: dark;
 }
 
 html {
-  background-color: var(--bg);
+  background-color: var(--layer-0);
   color: var(--text);
   font-family: var(--font-sans);
   scroll-behavior: smooth;
@@ -34,75 +53,80 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: var(--bg);
+  background-color: var(--layer-0);
   color: var(--text);
   overflow-x: hidden;
 }
 
-/* Hero-only atmospheric background composite with edge fade mask */
-.hero-atmosphere {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  overflow: hidden;
-  z-index: 0;
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
-  mask-image: radial-gradient(ellipse at center, #000 30%, transparent 80%);
-}
-
-/* Atmospheric silhouette image layer (mobile-first <200KB, desktop on md+) */
-.hero-silhouette-layer {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.32;
-  background-image: url('/src/assets/images/hero_silhouette_mobile.jpg');
+/* Ensure the floating header never covers anchored sections */
+[id],
+section[id] {
+  scroll-margin-top: 104px;
 }
 
 @media (min-width: 768px) {
-  .hero-silhouette-layer {
-    background-image: url('/src/assets/images/hero_silhouette_desktop.jpg');
+  [id],
+  section[id] {
+    scroll-margin-top: 112px;
   }
 }
 
-/* Dark gradient overlay on top: linear-gradient(to bottom, rgba(11,12,16,0.6), var(--bg) 95%) */
-.hero-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(11, 12, 16, 0.6), var(--bg) 95%);
+/* Floating header bar with backdrop blur and solid fallback */
+.floating-header-bar {
+  background: rgba(11, 12, 16, 0.72);
+  backdrop-filter: blur(14px) saturate(140%);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  box-shadow: var(--shadow-2);
 }
 
-/* Faint 48px grid at ~4% opacity over the image */
-.hero-grid {
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, rgba(197, 198, 199, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(197, 198, 199, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
+@supports not ((backdrop-filter: blur(14px)) or (-webkit-backdrop-filter: blur(14px))) {
+  .floating-header-bar {
+    background: #0B0C10;
+  }
 }
 
-/* Soft radial glow behind the hero headline */
-.hero-glow {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: min(800px, 90vw);
-  height: min(450px, 60vh);
-  background: radial-gradient(ellipse at center, rgba(102, 252, 241, 0.08) 0%, transparent 70%);
-  pointer-events: none;
-  z-index: 1;
+/* Background drift keyframes (transform-only, 40-60s) */
+@keyframes driftTopLeft {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(40px, 35px) scale(1.08);
+  }
+  100% {
+    transform: translate(-30px, 50px) scale(0.96);
+  }
 }
 
-/* Consistent subtle card border & 6px radius */
+@keyframes driftBottomRight {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-50px, -45px) scale(1.06);
+  }
+  100% {
+    transform: translate(35px, -25px) scale(0.95);
+  }
+}
+
+.drift-glow-1 {
+  animation: driftTopLeft 48s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.drift-glow-2 {
+  animation: driftBottomRight 56s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Default subtle card surface */
 .card-surface {
-  background-color: var(--surface);
+  background-color: var(--layer-2);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius);
-  transition: border-color 0.2s ease, background-color 0.2s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-1);
 }
 
 .card-surface:hover,
@@ -110,7 +134,64 @@ body {
   border-color: var(--accent-2);
 }
 
-/* Visible focus outline adhering to WCAG AA and token rules */
+/* Depth 2 Card with Cursor-following Spotlight & Elevation Lift */
+.interactive-card {
+  position: relative;
+  background-color: var(--layer-2);
+  border: 1px solid var(--border-subtle);
+  border-radius: 24px;
+  box-shadow: var(--shadow-2);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card-spotlight {
+  position: relative;
+}
+
+.spotlight-layer {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(420px circle at var(--mx, -999px) var(--my, -999px), rgba(102, 252, 241, 0.08), transparent 70%);
+  z-index: 1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .interactive-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(69, 162, 158, 0.5) !important;
+  }
+  .card-spotlight:hover .spotlight-layer {
+    opacity: 1;
+  }
+}
+
+/* Staggered Content Reveals (fade in and rises 16px, 60ms stagger) */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-item.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ghost outline stroke for typography */
+.ghost-outline-number {
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(102, 252, 241, 0.2);
+  line-height: 1;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Visible focus outline adhering to WCAG AA */
 .focus-ring {
   outline: none;
 }
@@ -119,7 +200,7 @@ body {
   outline-offset: 3px;
 }
 
-/* Ensure min 44px touch targets */
+/* Ensure minimum touch targets */
 .touch-target {
   min-height: 44px;
   min-width: 44px;
@@ -128,6 +209,7 @@ body {
   justify-content: center;
 }
 
+/* Accessibility: Reduced motion overrides */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -137,5 +219,17 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  .drift-glow-1,
+  .drift-glow-2 {
+    animation: none !important;
+  }
+  .interactive-card:hover {
+    transform: none !important;
+  }
+  .reveal-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

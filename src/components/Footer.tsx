@@ -10,9 +10,18 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="bg-[#0B0C10] border-t border-[rgba(197,198,199,0.12)] py-12 text-[#C5C6C7]" aria-label="Site Footer">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-8 border-b border-[rgba(197,198,199,0.12)]">
+    <footer className="bg-[var(--layer-0)] relative text-[#C5C6C7]" aria-label="Site Footer">
+      {/* 1px Gradient Divider on Top (transparent, accent-2 at 40%, transparent) */}
+      <div
+        className="w-full h-px"
+        style={{
+          background: 'linear-gradient(90deg, transparent, rgba(69, 162, 158, 0.4), transparent)',
+        }}
+        aria-hidden="true"
+      />
+
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8 pb-8 border-b border-[rgba(197,198,199,0.10)]">
           
           {/* Identity & Descriptor */}
           <div className="space-y-1.5">
@@ -37,7 +46,7 @@ export const Footer: React.FC = () => {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="touch-target px-1 text-[#C5C6C7] hover:text-[#66FCF1] transition-colors focus-ring rounded-[6px]"
+                    className="touch-target min-h-[44px] px-1 inline-flex items-center text-[#C5C6C7] hover:text-[#66FCF1] transition-colors focus-ring rounded-[12px]"
                   >
                     {link.label}
                   </a>
@@ -46,15 +55,15 @@ export const Footer: React.FC = () => {
             </ul>
           </nav>
 
-          {/* Back to top button */}
+          {/* 44px Raised Back to Top Button */}
           <button
             type="button"
             onClick={scrollToTop}
-            className="touch-target inline-flex items-center gap-1.5 text-xs font-mono text-[#C5C6C7] hover:text-[#66FCF1] transition-colors p-2 rounded-[6px] focus-ring"
+            className="touch-target w-11 h-11 min-w-[44px] min-h-[44px] rounded-[12px] bg-[var(--layer-2)] border border-[rgba(197,198,199,0.12)] shadow-[var(--shadow-1)] hover:shadow-[var(--shadow-2)] hover:border-[#66FCF1] text-[var(--text)] hover:text-[#66FCF1] flex items-center justify-center transition-all cursor-pointer focus-ring shrink-0"
             aria-label="Back to top of page"
+            title="Back to top"
           >
-            <span>Top</span>
-            <ArrowUp className="w-3.5 h-3.5" aria-hidden="true" />
+            <ArrowUp className="w-4 h-4" aria-hidden="true" />
           </button>
         </div>
 
@@ -63,7 +72,7 @@ export const Footer: React.FC = () => {
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <a
               href={`mailto:${PORTFOLIO_DATA.contact.email}`}
-              className="touch-target py-1 hover:text-[#66FCF1] transition-colors focus-ring rounded-[6px]"
+              className="touch-target min-h-[44px] inline-flex items-center hover:text-[#66FCF1] transition-colors focus-ring rounded-[12px]"
             >
               {PORTFOLIO_DATA.contact.email}
             </a>
@@ -73,14 +82,14 @@ export const Footer: React.FC = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Jade Polo on LinkedIn (opens in a new tab)"
-              className="touch-target py-1 hover:text-[#66FCF1] transition-colors focus-ring rounded-[6px]"
+              className="touch-target min-h-[44px] inline-flex items-center hover:text-[#66FCF1] transition-colors focus-ring rounded-[12px]"
             >
               LinkedIn Profile
             </a>
             <span aria-hidden="true" className="text-[#45A29E]">·</span>
             <a
               href="#contact"
-              className="touch-target py-1 hover:text-[#66FCF1] transition-colors focus-ring rounded-[6px]"
+              className="touch-target min-h-[44px] inline-flex items-center hover:text-[#66FCF1] transition-colors focus-ring rounded-[12px]"
             >
               Résumé on Request
             </a>

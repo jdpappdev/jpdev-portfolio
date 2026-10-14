@@ -84,6 +84,10 @@ export const PORTFOLIO_DATA = {
     resumeUrl: '', // Available upon request
     resumeStatus: 'Available upon request',
     location: 'Available for Remote & Freelance Projects',
+    portrait: {
+      src: '',
+      alt: 'Jade Polo portrait',
+    },
   },
 
   hero: {
@@ -105,7 +109,7 @@ export const PORTFOLIO_DATA = {
       description:
         'A digital product focused on organizing field-inspection workflows, documenting issues and evidence, and supporting structured reporting and review.',
       focus: 'Product workflows, interface structure, and practical application design.',
-      statusText: 'Project details and implementation evidence to be documented.',
+      statusText: 'Case study in progress.',
       statusBadge: 'Documentation In Progress',
       contextNotes:
         'The product is associated with field-inspection workflows, issues, evidence, and reporting. Presented as project context and architectural direction, not as proof that every feature is currently deployed.',

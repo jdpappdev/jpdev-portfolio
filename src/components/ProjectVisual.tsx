@@ -48,62 +48,60 @@ const ProjectVideoPlayer: React.FC<{ video: NonNullable<ProjectData['video']> }>
     };
   }, [hasError, isReducedMotion, video.src]);
 
-  if (hasError || !video.src) {
-    return (
-      <div className="space-y-3">
-        {video.label && (
-          <div className="text-xs font-mono uppercase tracking-wider text-[var(--text)] opacity-90">
-            {video.label}
-          </div>
-        )}
-        <div 
-          className="mx-auto rounded-[12px] border border-[rgba(197,198,199,0.12)] bg-[#1F2833] flex items-center justify-center p-8 text-center"
-          style={{ width: 'min(100%, 560px)', aspectRatio: video.aspect || '1/1' }}
-        >
-          <span className="font-mono text-xs text-[var(--text)] opacity-80">
-            Video not available yet
-          </span>
-        </div>
-        {video.description && (
-          <p className="font-['Barlow'] text-xs text-[var(--text)] opacity-80 leading-relaxed">
-            {video.description}
-          </p>
-        )}
-      </div>
-    );
-  }
-
   return (
-    <div className="space-y-3">
+    <div className="w-full max-w-[560px] mx-auto space-y-3">
       {video.label && (
         <div className="text-xs font-mono uppercase tracking-wider text-[var(--text)] opacity-90">
           {video.label}
         </div>
       )}
-      <div 
-        className="mx-auto flex items-center justify-center"
-        style={{ width: 'min(100%, 560px)' }}
-      >
-        <video
-          ref={videoRef}
-          src={video.src}
-          poster={video.poster || ''}
-          autoPlay={!isReducedMotion}
-          muted
-          loop
-          playsInline
-          preload="auto"
-          disablePictureInPicture
-          aria-label={video.title}
-          onError={() => setHasError(true)}
-          className="w-full h-auto object-contain pointer-events-none"
-          style={{
-            aspectRatio: video.aspect || '1/1',
-          }}
+
+      {/* Stacked Media Frame with Two Offset Back Plates and 32px desktop overlap */}
+      <div className="relative lg:-mt-8 mt-0 pr-4 pb-4 sm:pr-6 sm:pb-6">
+        {/* Back Plate 2: layer-2, translated 24px down-right, opacity 0.25 */}
+        <div
+          className="absolute inset-0 translate-x-3 translate-y-3 sm:translate-x-6 sm:translate-y-6 rounded-[20px] bg-[var(--layer-2)] border border-[rgba(197,198,199,0.10)] opacity-25 pointer-events-none z-0"
+          aria-hidden="true"
+        />
+        {/* Back Plate 1: layer-2, translated 12px down-right, opacity 0.5 */}
+        <div
+          className="absolute inset-0 translate-x-1.5 translate-y-1.5 sm:translate-x-3 sm:translate-y-3 rounded-[20px] bg-[var(--layer-2)] border border-[rgba(197,198,199,0.10)] opacity-50 pointer-events-none z-[1]"
+          aria-hidden="true"
+        />
+
+        {/* Front Video Frame: layer-3, radius 20px, shadow-3 */}
+        <div
+          className="relative z-10 rounded-[20px] bg-[var(--layer-3)] border border-[rgba(197,198,199,0.12)] shadow-[var(--shadow-3)] overflow-hidden flex items-center justify-center"
+          style={{ width: '100%', aspectRatio: video.aspect || '1/1' }}
         >
-          Your browser does not support the video tag.
-        </video>
+          {hasError || !video.src ? (
+            <div className="p-8 text-center flex items-center justify-center w-full h-full">
+              <span className="font-mono text-xs text-[var(--text)] opacity-80">
+                Video not available yet
+              </span>
+            </div>
+          ) : (
+            <video
+              ref={videoRef}
+              src={video.src}
+              poster={video.poster || ''}
+              autoPlay={!isReducedMotion}
+              muted
+              loop
+              playsInline
+              preload="auto"
+              disablePictureInPicture
+              aria-label={video.title}
+              onError={() => setHasError(true)}
+              className="w-full h-full object-cover pointer-events-none"
+              style={{ aspectRatio: video.aspect || '1/1' }}
+            >
+              Your browser does not support the video tag.
+            </video>
+          )}
+        </div>
       </div>
+
       {video.description && (
         <p className="font-['Barlow'] text-xs text-[var(--text)] opacity-80 leading-relaxed">
           {video.description}
@@ -124,7 +122,7 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ project, className
   const hasSupportingScreenshot = supportingSlot?.status === 'screenshot' && Boolean(supportingSlot.src);
 
   return (
-    <div className={`space-y-4 ${className}`}>
+    <div className={`w-full ${className}`}>
       {video?.src ? (
         <ProjectVideoPlayer video={video} />
       ) : (
