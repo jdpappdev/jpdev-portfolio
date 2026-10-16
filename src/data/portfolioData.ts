@@ -68,8 +68,9 @@ export interface ProcessStep {
 }
 
 export const CONTACT_DETAILS = {
-  email: 'jdpolo.1218@gmail.com',
-  linkedin: 'https://www.linkedin.com/in/jade-polo-a46833411',
+  email: (import.meta.env?.VITE_CONTACT_EMAIL as string) || 'jdpolo.1218@gmail.com',
+  linkedin: (import.meta.env?.VITE_LINKEDIN_URL as string) || 'https://linkedin.com/in/jade-polo',
+  github: (import.meta.env?.VITE_GITHUB_URL as string) || 'https://github.com/jdpappdev',
 };
 
 export const PORTFOLIO_DATA = {
@@ -81,12 +82,13 @@ export const PORTFOLIO_DATA = {
     brandPromise: 'From real-world problems to practical digital products.',
     email: CONTACT_DETAILS.email,
     linkedinUrl: CONTACT_DETAILS.linkedin,
+    githubUrl: CONTACT_DETAILS.github,
     resumeUrl: '', // Available upon request
     resumeStatus: 'Available upon request',
     location: 'Available for Remote & Freelance Projects',
     portrait: {
       src: '',
-      alt: 'Jade Polo portrait',
+      alt: 'Portrait of Jade Polo, Frontend Developer',
     },
   },
 
@@ -149,7 +151,7 @@ export const PORTFOLIO_DATA = {
           slot: 'primary',
           label: 'Primary Interface',
           src: '',
-          alt: 'Primary interface screenshot coming soon',
+          alt: 'Assured Capture - Primary inspection dashboard interface preview',
           caption: 'Main inspection dashboard',
           status: 'placeholder',
           frame: 'mobile',
@@ -159,7 +161,7 @@ export const PORTFOLIO_DATA = {
           slot: 'workflow',
           label: 'Key Workflow',
           src: '',
-          alt: 'Key workflow screenshot coming soon',
+          alt: 'Assured Capture - Field inspection workflow and issue overview',
           caption: 'Report overview',
           status: 'placeholder',
           frame: 'mobile',
@@ -169,7 +171,7 @@ export const PORTFOLIO_DATA = {
           slot: 'supporting',
           label: 'Supporting Screen',
           src: '',
-          alt: 'Supporting screen screenshot coming soon',
+          alt: 'Assured Capture - Inspection evidence and issue photo logger',
           caption: 'Evidence logger',
           status: 'placeholder',
           frame: 'mobile',
@@ -215,7 +217,7 @@ export const PORTFOLIO_DATA = {
           slot: 'primary',
           label: 'Primary Interface',
           src: '',
-          alt: 'Primary interface screenshot coming soon',
+          alt: 'Deaf Contact Record - Main dashboard and contact directory interface preview',
           caption: 'Home dashboard',
           status: 'placeholder',
           frame: 'mobile',
@@ -225,7 +227,7 @@ export const PORTFOLIO_DATA = {
           slot: 'workflow',
           label: 'Key Workflow',
           src: '',
-          alt: 'Key workflow screenshot coming soon',
+          alt: 'Deaf Contact Record - Contact profile and interaction notes workflow',
           caption: 'Contact profile view',
           status: 'placeholder',
           frame: 'mobile',
@@ -235,7 +237,7 @@ export const PORTFOLIO_DATA = {
           slot: 'supporting',
           label: 'Supporting Screen',
           src: '',
-          alt: 'Supporting screen screenshot coming soon',
+          alt: 'Deaf Contact Record - Territory organization and community map view',
           caption: 'Territory map view',
           status: 'placeholder',
           frame: 'mobile',
@@ -327,6 +329,7 @@ export const PORTFOLIO_DATA = {
   contact: {
     email: CONTACT_DETAILS.email,
     linkedin: CONTACT_DETAILS.linkedin,
+    github: CONTACT_DETAILS.github,
     heading: 'Have an idea or a workflow that needs improvement?',
     copy: "If you're hiring a frontend developer or looking for someone to help shape and build a practical digital product, I'd like to hear what you're working on.",
     primaryCta: 'Discuss a Project',

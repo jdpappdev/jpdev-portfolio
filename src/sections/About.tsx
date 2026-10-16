@@ -91,7 +91,7 @@ export const About: React.FC = () => {
                   {portraitSrc ? (
                     <img
                       src={portraitSrc}
-                      alt={PORTFOLIO_DATA.owner.name}
+                      alt={PORTFOLIO_DATA.owner.portrait?.alt || `Portrait of ${PORTFOLIO_DATA.owner.name}, Frontend Developer`}
                       className="w-full h-full object-cover"
                     />
                   ) : (
