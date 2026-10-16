@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Hook to trigger fade-in and 16px rise stagger reveal (60ms stagger, once)
+ * Hook to trigger fade-in and 24px rise stagger reveal (60ms stagger, once)
  * via IntersectionObserver. Bypassed immediately if prefers-reduced-motion is active.
  */
 export function useReveal() {
@@ -40,8 +40,8 @@ export function useReveal() {
         });
       },
       {
-        threshold: 0.08,
-        rootMargin: '0px 0px -40px 0px',
+        threshold: 0.2,
+        rootMargin: '0px',
       }
     );
 

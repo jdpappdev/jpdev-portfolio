@@ -70,6 +70,13 @@ export const Skills: React.FC = () => {
               </p>
             </div>
 
+            <div className="code-motif relative z-10 mt-8 mb-8 h-20 overflow-hidden rounded-xl border border-[rgba(102,252,241,0.16)] bg-[#0B0C10]/60 px-4 py-3 font-mono text-[11px] leading-5 text-[#66FCF1]/75" aria-hidden="true">
+              <span className="block">const interface = {'{'}</span>
+              <span className="block pl-4 text-[#C5C6C7]/70">clarity: true,</span>
+              <span className="block pl-4">motion: 'purposeful'</span>
+              <span className="block">{'}'}</span>
+            </div>
+
             <div className="relative z-10 mt-8 pt-4 border-t border-[rgba(197,198,199,0.12)] flex items-center justify-between text-xs font-mono text-[rgba(197,198,199,0.8)]">
               <span>Core Specialization</span>
               <span className="text-[#66FCF1]">Modern Web Standards</span>

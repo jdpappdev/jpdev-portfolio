@@ -46,7 +46,7 @@ html {
   background-color: var(--layer-0);
   color: var(--text);
   font-family: var(--font-sans);
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -73,8 +73,8 @@ section[id] {
 
 /* Floating header bar with backdrop blur and solid fallback */
 .floating-header-bar {
-  background: rgba(11, 12, 16, 0.72);
-  backdrop-filter: blur(14px) saturate(140%);
+  background: rgba(11, 12, 16, 0.88);
+  backdrop-filter: blur(24px) saturate(140%);
   -webkit-backdrop-filter: blur(14px) saturate(140%);
   box-shadow: var(--shadow-2);
 }
@@ -154,7 +154,7 @@ section[id] {
   border-radius: inherit;
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
   background: radial-gradient(420px circle at var(--mx, -999px) var(--my, -999px), rgba(102, 252, 241, 0.08), transparent 70%);
   z-index: 1;
 }
@@ -172,8 +172,8 @@ section[id] {
 /* Staggered Content Reveals (fade in and rises 16px, 60ms stagger) */
 .reveal-item {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1), transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   will-change: opacity, transform;
 }
 
@@ -210,6 +210,13 @@ section[id] {
 }
 
 /* Accessibility: Reduced motion overrides */
+.code-motif span { animation: code-line-in 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.code-motif span:nth-child(2) { animation-delay: 200ms; }
+.code-motif span:nth-child(3) { animation-delay: 400ms; }
+.code-motif span:nth-child(4) { animation-delay: 700ms; }
+@keyframes code-line-in { from { opacity: 0; transform: translateX(-8px); } to { opacity: 1; transform: translateX(0); } }
+.process-step-active { animation: ring-pulse 700ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes ring-pulse { 0% { box-shadow: var(--edge), 0 0 0 rgba(102,252,241,0); } 50% { box-shadow: var(--edge), 0 0 22px rgba(102,252,241,0.55); } 100% { box-shadow: var(--edge), 0 0 16px rgba(102,252,241,0.3); } }
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -230,6 +237,9 @@ section[id] {
   .reveal-item {
     opacity: 1 !important;
     transform: none !important;
-    transition: none !important;
+    transition: opacity 0.4s ease !important;
+  }
+  .decode-label {
+    opacity: 1 !important;
   }
 }

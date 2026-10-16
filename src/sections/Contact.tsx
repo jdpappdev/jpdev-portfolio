@@ -152,10 +152,10 @@ ${formData.description}`;
                   Direct Email
                 </span>
                 
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex flex-col gap-3">
                   <a
                     href={`mailto:${PORTFOLIO_DATA.contact.email}`}
-                    className="font-mono text-[17px] sm:text-[20px] font-semibold text-white hover:text-[#66FCF1] transition-colors truncate focus-ring rounded-[12px] py-1"
+                    className="font-mono text-[15px] sm:text-[20px] font-semibold text-white hover:text-[#66FCF1] transition-colors break-all focus-ring rounded-[12px] py-1"
                   >
                     {PORTFOLIO_DATA.contact.email}
                   </a>

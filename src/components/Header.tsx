@@ -5,6 +5,7 @@ import { PORTFOLIO_DATA } from '../data/portfolioData';
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('');
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   const navItems = [
     { label: 'Projects', href: '#projects', id: 'projects' },
@@ -18,6 +19,8 @@ export const Header: React.FC = () => {
   useEffect(() => {
     const handleScrollSpy = () => {
       const scrollPosition = window.scrollY + 120;
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0);
       let currentSection = '';
 
       for (const item of navItems) {
@@ -199,6 +202,7 @@ export const Header: React.FC = () => {
               </nav>
             </div>
           )}
+          <div className="absolute left-0 right-0 -bottom-[3px] h-[2px] origin-left bg-[#66FCF1] shadow-[0_0_10px_rgba(102,252,241,0.7)]" style={{ transform: `scaleX(${scrollProgress})` }} aria-hidden="true" />
         </header>
       </div>
     </>
