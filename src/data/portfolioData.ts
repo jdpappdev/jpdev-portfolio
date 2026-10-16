@@ -139,7 +139,7 @@ export const PORTFOLIO_DATA = {
       aspectRatio: '16/10',
       video: {
         src: '/assets/projects/assured-capture-walkthrough.mp4',
-        poster: '',
+        poster: '/assets/projects/assured-capture-walkthrough-poster.svg',
         title: 'Assured Capture, presentation video',
         aspect: '1/1',
         label: 'Presentation video featuring screens from the app',
@@ -205,7 +205,7 @@ export const PORTFOLIO_DATA = {
       aspectRatio: '16/10',
       video: {
         src: '/assets/projects/deaf-contact-record-walkthrough.mp4',
-        poster: '',
+        poster: '/assets/projects/deaf-contact-record-walkthrough-poster.svg',
         title: 'Deaf Contact Record, presentation video',
         aspect: '1/1',
         label: 'Presentation video featuring screens from the app',

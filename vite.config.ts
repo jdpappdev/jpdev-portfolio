@@ -13,6 +13,12 @@ export default defineConfig(() => {
       alias: {
         '@': path.resolve(__dirname, '.'),
       },
+      // Let Vite normalize all React entry points through the package exports.
+      // Direct file aliases can create a second React instance in the preview bundle.
+      dedupe: ['react', 'react-dom'],
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom'],
     },
     build: {
       rollupOptions: {

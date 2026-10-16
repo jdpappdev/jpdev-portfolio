@@ -79,7 +79,9 @@ export const Process: React.FC = () => {
           <div
             className="absolute top-5 left-[10%] h-px bg-gradient-to-r from-[#66FCF1] via-[#45A29E] to-transparent pointer-events-none transition-all duration-200 ease-out"
             style={{
-              width: `${isReducedMotion ? 80 : scrollProgress * 80}%`,
+              width: '80%',
+              transform: `scaleX(${isReducedMotion ? 1 : scrollProgress})`,
+              transformOrigin: 'left',
             }}
             aria-hidden="true"
           />
@@ -100,7 +102,7 @@ export const Process: React.FC = () => {
                   <div
                     className={`w-10 h-10 min-w-10 min-h-10 rounded-full flex items-center justify-center font-mono text-xs font-semibold bg-[var(--layer-3)] shadow-[var(--edge)] transition-all duration-300 ${
                       isPassed
-                        ? 'border border-[rgba(102,252,241,0.6)] text-[#66FCF1] shadow-[var(--edge),0_0_16px_rgba(102,252,241,0.3)]'
+                        ? 'border border-[rgba(102,252,241,0.6)] text-[#66FCF1] shadow-[var(--edge),0_0_16px_rgba(102,252,241,0.3)] process-step-active'
                         : 'border border-[rgba(197,198,199,0.15)] text-[rgba(197,198,199,0.7)]'
                     }`}
                   >
@@ -155,7 +157,7 @@ export const Process: React.FC = () => {
                   <div
                     className={`w-10 h-10 min-w-10 min-h-10 rounded-full flex items-center justify-center font-mono text-xs font-semibold bg-[var(--layer-3)] shadow-[var(--edge)] shrink-0 transition-all duration-300 ${
                       isPassed
-                        ? 'border border-[rgba(102,252,241,0.6)] text-[#66FCF1] shadow-[var(--edge),0_0_16px_rgba(102,252,241,0.3)]'
+                        ? 'border border-[rgba(102,252,241,0.6)] text-[#66FCF1] shadow-[var(--edge),0_0_16px_rgba(102,252,241,0.3)] process-step-active'
                         : 'border border-[rgba(197,198,199,0.15)] text-[rgba(197,198,199,0.7)]'
                     }`}
                   >

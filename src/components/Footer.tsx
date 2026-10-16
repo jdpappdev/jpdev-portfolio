@@ -55,19 +55,9 @@ export const Footer: React.FC = () => {
             </ul>
           </nav>
 
-          {/* 44px Raised Back to Top Button */}
-          <button
-            type="button"
-            onClick={scrollToTop}
-            className="touch-target w-11 h-11 min-w-[44px] min-h-[44px] rounded-[12px] bg-[var(--layer-2)] border border-[rgba(197,198,199,0.12)] shadow-[var(--shadow-1)] hover:shadow-[var(--shadow-2)] hover:border-[#66FCF1] text-[var(--text)] hover:text-[#66FCF1] flex items-center justify-center transition-all cursor-pointer focus-ring shrink-0"
-            aria-label="Back to top of page"
-            title="Back to top"
-          >
-            <ArrowUp className="w-4 h-4" aria-hidden="true" />
-          </button>
         </div>
 
-        {/* Lower row: verified links & programmatic year */}
+        {/* Lower row: verified links, programmatic year, and back to top */}
         <div className="pt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-mono text-[rgba(197,198,199,0.85)]">
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
             <a
@@ -86,19 +76,27 @@ export const Footer: React.FC = () => {
             >
               LinkedIn Profile
             </a>
-            <span aria-hidden="true" className="text-[#45A29E]">·</span>
             <a
               href="#contact"
-              className="touch-target min-h-[44px] inline-flex items-center hover:text-[#66FCF1] transition-colors focus-ring rounded-[12px]"
+              className="touch-target min-h-[44px] inline-flex items-center whitespace-nowrap hover:text-[#66FCF1] transition-colors focus-ring rounded-[12px]"
             >
               Résumé on Request
             </a>
           </div>
 
-          <div>
+          <div className="flex w-full sm:w-auto items-center justify-between gap-4">
             <span className="font-['Barlow'] text-xs text-[#C5C6C7]/80">
               © {currentYear} JADE POLO · {PORTFOLIO_DATA.owner.businessBrand}
             </span>
+            <button
+              type="button"
+              onClick={scrollToTop}
+              className="touch-target w-11 h-11 min-w-[44px] min-h-[44px] rounded-[12px] bg-[var(--layer-2)] border border-[rgba(197,198,199,0.12)] shadow-[var(--shadow-1)] hover:shadow-[var(--shadow-2)] hover:border-[#66FCF1] text-[var(--text)] hover:text-[#66FCF1] flex items-center justify-center transition-all cursor-pointer focus-ring shrink-0"
+              aria-label="Back to top of page"
+              title="Back to top"
+            >
+              <ArrowUp className="w-4 h-4" aria-hidden="true" />
+            </button>
           </div>
         </div>
       </div>

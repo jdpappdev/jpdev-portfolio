@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Hook to trigger fade-in and 16px rise stagger reveal (60ms stagger, once)
- * via IntersectionObserver. Bypassed immediately if prefers-reduced-motion is active.
+ * Hook to trigger early fade-in reveals via IntersectionObserver. Content is
+ * shown immediately when motion is reduced or the observer is unavailable.
  */
 export function useReveal() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -20,34 +20,40 @@ export function useReveal() {
       return;
     }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        let batchIndex = 0;
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const el = entry.target as HTMLElement;
-            // Use explicit data-stagger or incrementing batch index
-            const staggerOrder = el.dataset.staggerIndex
-              ? parseInt(el.dataset.staggerIndex, 10)
-              : batchIndex++;
-            
-            setTimeout(() => {
-              el.classList.add('revealed');
-            }, staggerOrder * 60);
+    const revealAll = () => items.forEach((item) => item.classList.add('revealed'));
 
-            observer.unobserve(el);
-          }
-        });
-      },
-      {
-        threshold: 0.08,
-        rootMargin: '0px 0px -40px 0px',
-      }
-    );
+    let observer: IntersectionObserver;
+    try {
+      observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const el = entry.target as HTMLElement;
+              const staggerOrder = el.dataset.staggerIndex
+                ? parseInt(el.dataset.staggerIndex, 10)
+                : 0;
 
-    items.forEach((item) => observer.observe(item));
+              window.setTimeout(() => el.classList.add('revealed'), staggerOrder * 60);
+              observer.unobserve(el);
+            }
+          });
+        },
+        {
+          threshold: 0,
+          rootMargin: '0px 0px 15% 0px',
+        }
+      );
+      items.forEach((item) => observer.observe(item));
+    } catch {
+      revealAll();
+      return;
+    }
+
+    // A defensive fallback prevents content remaining hidden in unusual preview environments.
+    const fallback = window.setTimeout(revealAll, 1200);
 
     return () => {
+      window.clearTimeout(fallback);
       observer.disconnect();
     };
   }, []);
