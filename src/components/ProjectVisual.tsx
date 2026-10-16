@@ -93,7 +93,7 @@ const ProjectVideoPlayer: React.FC<{ video: NonNullable<ProjectData['video']> }>
               disablePictureInPicture
               aria-label={video.title}
               onError={() => setHasError(true)}
-              className="w-full h-full object-contain pointer-events-none"
+              className="w-full h-full object-contain pointer-events-none project-video"
               style={{ aspectRatio: video.aspect || '1/1' }}
             >
               Your browser does not support the video tag.

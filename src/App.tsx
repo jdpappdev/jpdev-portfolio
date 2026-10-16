@@ -13,9 +13,10 @@ import { Footer } from './components/Footer';
 export default function App() {
   useEffect(() => {
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (reducedMotion) return;
+    const touchDevice = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+    if (reducedMotion || touchDevice) return;
 
-    const lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+    const lenis = new Lenis({ lerp: 0.12, smoothWheel: true, syncTouch: false });
     let frame = 0;
     const raf = (time: number) => {
       lenis.raf(time);
