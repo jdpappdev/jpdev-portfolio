@@ -13,6 +13,11 @@ export default defineConfig(() => {
       alias: {
         '@': path.resolve(__dirname, '.'),
       },
+      // Keep hooks and the JSX runtime on the same React instance in Vite preview.
+      dedupe: ['react', 'react-dom'],
+    },
+    optimizeDeps: {
+      include: ['react', 'react-dom'],
     },
     build: {
       rollupOptions: {
