@@ -10,7 +10,9 @@ This project is my personal portfolio and a work in progress as I grow as a fron
 
 Preview
 
-<!-- Add screenshots after uploading them to the repository. -->Built With
+![Portfolio homepage](./portfolio-home.png)
+
+Built With
 
 - React
 - TypeScript
