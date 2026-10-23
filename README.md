@@ -1,78 +1,50 @@
-# Jade Polo — Frontend Developer Portfolio
+JDP — Developer Portfolio
 
-> Personal developer portfolio showcasing frontend web applications, interactive interfaces, and practical digital product prototypes.
+My personal portfolio website showcasing my development skills, selected projects, and approach to building user-focused digital products.
 
-## Live Demo
+"View Live Portfolio" (https://jpdev-portfolio-lemon.vercel.app/)
 
-- **Live URL**: [https://jpdev-portfolio-lemon.vercel.app](https://jpdev-portfolio-lemon.vercel.app)
+Overview
 
-## Screenshot
+This project is my personal portfolio and a work in progress as I grow as a frontend developer. It brings together my interest in product thinking, user experience, interface design, and AI-assisted application development.
 
-![Portfolio screenshot](./public/assets/screenshot.png)
+Preview
 
-## Tech Stack
+<!-- Add screenshots after uploading them to the repository. -->Built With
 
-- **Framework**: React 19
-- **Language**: TypeScript
-- **Bundler & Tooling**: Vite 8 & esbuild
-- **Styling**: Tailwind CSS v4 with custom theme tokens & Autoprefixer
-- **Icons**: Lucide React
+- React
+- TypeScript
+- HTML
+- CSS
+- Vercel for deployment
 
-## Features
+Featured Projects
 
-- **Selected Projects Showcase**: Case studies for *Assured Capture* and *Deaf Contact Record* with embedded walkthrough videos, workflow milestones, and interactive detail modals.
-- **Skills Bento Grid**: Visual grid detailing core competencies across frontend development, UI architecture, usability, AI-assisted development, and product problem-solving.
-- **5-Stage Development Process**: Structured overview covering problem discovery, planning, component implementation, testing, and iterative refinement.
-- **About & Core Philosophy**: Overview of background, approach to building maintainable web applications, and identity card.
-- **Interactive Contact Hub**: Direct email row with 1-click clipboard copy confirmation, external professional profile links, and a message composer that formats directly for email client dispatch.
-- **Responsive & Accessible UI**: Responsive layouts across mobile, tablet, and desktop viewports, WCAG AA contrast, semantic landmarks, keyboard focus management, and automatic support for `prefers-reduced-motion`.
+- Assured Capture — A field-inspection documentation platform.
+- Deaf Contact Record — A contact and visit management application.
 
-## Getting Started
+Development Approach
 
-### Prerequisites
+I use AI-assisted development to help design, implement, and refine applications while actively improving my understanding of the underlying code, frontend architecture, and software development practices.
 
-- Node.js (v18 or higher recommended)
-- npm
+Run Locally
 
-### Installation
+To run this project locally, first clone the repository:
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/jdpappdev/jpdev-portfolio.git
-   cd jpdev-portfolio
-   ```
+git clone https://github.com/jdpappdev/jpdev-portfolio.git
+cd jpdev-portfolio
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+Install dependencies and start the development server using the scripts defined in "package.json":
 
-3. Configure environment variables:
-   ```bash
-   cp .env.example .env
-   ```
+npm install
+npm run dev
 
-4. Start the local development server:
-   ```bash
-   npm run dev
-   ```
+Live Deployment
 
-## Build
+The portfolio is deployed on Vercel:
 
-To create a production-ready bundle:
+https://jpdev-portfolio-lemon.vercel.app/
 
-```bash
-npm run build
-```
+---
 
-To preview the production build locally:
-
-```bash
-npm run preview
-```
-
-## Author
-
-**Jade Polo**
-- **LinkedIn**: [https://linkedin.com/in/jade-polo](https://linkedin.com/in/jade-polo)
-- **GitHub**: [https://github.com/jdpappdev](https://github.com/jdpappdev)
+Built and maintained by JDP.
