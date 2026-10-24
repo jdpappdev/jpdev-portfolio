@@ -158,7 +158,7 @@ export const PORTFOLIO_DATA = {
           detail: 'Deriving sprint velocity, burn-down metrics, and billable hours from shared state.',
         },
       ],
-      ctaText: 'Explore Case Study',
+      ctaText: 'Explore Project',
       hasScreenshots: true,
       aspectRatio: '16/10',
       visualSlots: {
