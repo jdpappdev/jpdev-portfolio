@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { ExternalLink } from 'lucide-react';
 import { ProjectData } from '../data/portfolioData';
 
 interface ProjectVisualProps {
@@ -121,10 +122,196 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ project, className
   const hasWorkflowScreenshot = workflowSlot?.status === 'screenshot' && Boolean(workflowSlot.src);
   const hasSupportingScreenshot = supportingSlot?.status === 'screenshot' && Boolean(supportingSlot.src);
 
+  const isDesktopFrame = primarySlot?.frame === 'desktop';
+  const isPlotline = project.id === 'plotline';
+
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+  const [containerWidth, setContainerWidth] = useState<number>(620);
+  const iframeContainerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = iframeContainerRef.current;
+    if (!el) return;
+
+    const updateWidth = () => {
+      if (el) {
+        setContainerWidth(el.clientWidth || 620);
+      }
+    };
+
+    updateWidth();
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.contentRect && entry.contentRect.width > 0) {
+          setContainerWidth(entry.contentRect.width);
+        }
+      }
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isPlotline]);
+
+  const internalWidth = 1280;
+  const internalHeight = 720;
+  const scale = containerWidth > 0 ? containerWidth / internalWidth : 1;
+
+  if (isPlotline) {
+    return (
+      <div className={`w-full max-w-[620px] mx-auto space-y-3 ${className}`}>
+        <div className="text-xs font-mono uppercase tracking-wider text-[var(--text)] opacity-90 flex items-center justify-between">
+          <span>Live Interactive App Preview</span>
+          <a
+            href={project.liveUrl || 'https://plotline-phi.vercel.app/'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#66FCF1] hover:underline flex items-center gap-1 font-semibold normal-case text-xs focus-ring"
+            aria-label="Open Plotline in a new tab"
+          >
+            Open in new tab <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+          </a>
+        </div>
+        <div className="relative rounded-[20px] bg-[var(--layer-3)] border border-[rgba(197,198,199,0.15)] shadow-[var(--shadow-3)] overflow-hidden">
+          {/* Browser top chrome bar */}
+          <div className="flex items-center justify-between px-4 py-2.5 bg-[#0B0C10]/95 border-b border-[rgba(197,198,199,0.12)]">
+            <div className="flex items-center gap-1.5" aria-hidden="true">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+            </div>
+            <div className="px-3 py-1 rounded bg-[#1F2833] text-[11px] font-mono text-[#C5C6C7]/90 truncate max-w-[260px] flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-[#66FCF1] animate-pulse" aria-hidden="true" />
+              <span>plotline-phi.vercel.app</span>
+            </div>
+            <a
+              href={project.liveUrl || 'https://plotline-phi.vercel.app/'}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="touch-target inline-flex items-center gap-1 text-[#66FCF1] hover:text-white text-xs font-mono transition-colors focus-ring"
+              aria-label="Open Plotline application in a new tab"
+            >
+              <span>External</span>
+              <ExternalLink className="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          {/* Scaled Desktop Iframe Container with 16:9 Aspect Ratio */}
+          <div
+            ref={iframeContainerRef}
+            className="relative w-full aspect-[16/9] bg-[#0B0C10] overflow-hidden"
+          >
+            {!iframeLoaded && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0B0C10]/90 z-10 space-y-3">
+                <div className="w-6 h-6 border-2 border-[#66FCF1] border-t-transparent rounded-full animate-spin" />
+                <span className="font-mono text-xs text-[#C5C6C7]">Loading live Plotline app...</span>
+              </div>
+            )}
+            <iframe
+              src="https://plotline-phi.vercel.app/"
+              title="Live Plotline application preview"
+              loading="lazy"
+              onLoad={() => setIframeLoaded(true)}
+              className="absolute top-0 left-0 border-0"
+              style={{
+                width: `${internalWidth}px`,
+                height: `${internalHeight}px`,
+                transform: `scale(${scale})`,
+                transformOrigin: 'top left',
+              }}
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+            />
+          </div>
+        </div>
+        <p className="font-['Barlow'] text-xs text-[var(--text)] opacity-80 leading-relaxed flex items-center justify-between">
+          <span>Fully interactive live preview connected to deployed application at plotline-phi.vercel.app.</span>
+          <a
+            href={project.liveUrl || 'https://plotline-phi.vercel.app/'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#66FCF1] sm:hidden font-mono text-[11px] inline-flex items-center gap-1 hover:underline"
+          >
+            Open Plotline <ExternalLink className="w-3 h-3" aria-hidden="true" />
+          </a>
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className={`w-full ${className}`}>
       {video?.src ? (
         <ProjectVideoPlayer video={video} />
+      ) : isDesktopFrame && hasPrimaryScreenshot && primarySlot ? (
+        (() => {
+          const previewContent = (
+            <div className="w-full max-w-[620px] mx-auto space-y-3 group cursor-pointer">
+              {primarySlot.label && (
+                <div className="text-xs font-mono uppercase tracking-wider text-[var(--text)] opacity-90 flex items-center justify-between">
+                  <span>{primarySlot.label}</span>
+                  <span className="text-[#66FCF1] opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 font-semibold normal-case text-xs">
+                    Explore live Plotline <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                  </span>
+                </div>
+              )}
+              <div className="relative rounded-[20px] bg-[var(--layer-3)] border border-[rgba(197,198,199,0.15)] group-hover:border-[#66FCF1]/50 shadow-[var(--shadow-3)] group-hover:shadow-[var(--glow-accent)] transition-all duration-300 overflow-hidden">
+                {/* Browser top chrome bar */}
+                <div className="flex items-center justify-between px-4 py-2.5 bg-[#0B0C10]/95 border-b border-[rgba(197,198,199,0.12)]">
+                  <div className="flex items-center gap-1.5" aria-hidden="true">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                  </div>
+                  <div className="px-3 py-1 rounded bg-[#1F2833] text-[11px] font-mono text-[#C5C6C7]/90 truncate max-w-[260px] flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#66FCF1] animate-pulse" aria-hidden="true" />
+                    <span>plotline-phi.vercel.app</span>
+                  </div>
+                  <div className="w-10 flex justify-end text-[#66FCF1] opacity-75 group-hover:opacity-100 transition-opacity" aria-hidden="true">
+                    <ExternalLink className="w-4 h-4" />
+                  </div>
+                </div>
+                <div className="relative overflow-hidden">
+                  <img
+                    src={primarySlot.src}
+                    alt={primarySlot.alt}
+                    width={primarySlot.width || 1200}
+                    height={primarySlot.height || 675}
+                    loading="lazy"
+                    className="w-full h-auto object-cover block group-hover:scale-[1.01] transition-transform duration-500"
+                  />
+                  {/* Subtle overlay on hover / touch interaction cue */}
+                  <div className="absolute inset-0 bg-[#0B0C10]/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center sm:justify-start p-4 pointer-events-none">
+                    <span className="inline-flex items-center gap-2 px-3.5 py-2 rounded-[10px] bg-[#0B0C10]/95 border border-[#66FCF1]/40 text-[#66FCF1] font-mono text-xs shadow-lg backdrop-blur-md">
+                      <span>Explore live Plotline</span>
+                      <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+              {primarySlot.caption && (
+                <p className="font-['Barlow'] text-xs text-[var(--text)] opacity-80 leading-relaxed flex items-center justify-between">
+                  <span>{primarySlot.caption}</span>
+                  <span className="text-[#66FCF1] sm:hidden font-mono text-[11px] inline-flex items-center gap-1">
+                    Tap to open live app <ExternalLink className="w-3 h-3" aria-hidden="true" />
+                  </span>
+                </p>
+              )}
+            </div>
+          );
+
+          if (project.liveUrl) {
+            return (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Explore live Plotline application at ${project.liveUrl} (opens in new tab)`}
+                className="block w-full focus-ring rounded-[22px] transition-transform duration-200 hover:-translate-y-1"
+              >
+                {previewContent}
+              </a>
+            );
+          }
+          return previewContent;
+        })()
       ) : (
         (hasPrimaryScreenshot || hasWorkflowScreenshot || hasSupportingScreenshot) && (
           <div className="flex flex-col md:flex-row items-center md:items-end justify-center md:justify-start gap-4 lg:gap-6">

@@ -53,6 +53,9 @@ export interface ProjectData {
   hasScreenshots: boolean;
   aspectRatio?: '16/10' | '16/9' | '4/3' | '1/1';
   video?: ProjectVideo;
+  liveUrl?: string;
+  sourceUrl?: string;
+  technologies?: string[];
 }
 
 export interface SkillCategory {
@@ -104,6 +107,83 @@ export const PORTFOLIO_DATA = {
   },
 
   projects: [
+    {
+      id: 'plotline',
+      name: 'Plotline',
+      tagline: 'Studio Management Workspace',
+      category: 'Studio Management & Project Workspace',
+      description:
+        'A project management workspace connecting tasks, schedules, team workload, and focus-time analytics through one consistent, data-driven interface.',
+      focus: 'Frontend architecture, state management with Zustand, drag-and-drop Kanban boards, performance analytics, and browser persistence.',
+      statusText: 'Production-ready working client app with comprehensive unit and E2E test coverage.',
+      statusBadge: 'Featured Project · Live Demo',
+      contextNotes:
+        'Built with React, TypeScript, Tailwind CSS, Zustand, Vitest, and Playwright. Fully functional client-side workspace featuring realistic seeded demo data and persistent browser storage.',
+      contribution:
+        'Designed and built independently with AI assistance. Implemented the complete interface architecture, reactive state management, interactive Kanban board, team workload allocation, focus timer, and analytics reporting.',
+      liveUrl: 'https://plotline-phi.vercel.app/',
+      sourceUrl: 'https://github.com/jdpappdev/Plotline',
+      technologies: [
+        'React',
+        'TypeScript',
+        'Tailwind CSS',
+        'Zustand',
+        'Vitest',
+        'Playwright',
+      ],
+      reportedFeatures: [
+        'Interactive Kanban board with drag-and-drop workflow progression',
+        'Task tracking, priority management, and dependencies',
+        'Team workload allocation and individual capacity monitoring',
+        'Integrated calendar scheduling and key milestone tracking',
+        'Focus timer with logged time reflected in live analytics',
+        'Data import, CSV reporting, and project data exports',
+        'Command palette, global search, and keyboard shortcuts',
+        'Undoable deletion and browser-based state persistence',
+      ],
+      workflowStages: [
+        {
+          step: '01',
+          title: 'Task & Kanban Tracking',
+          detail: 'Managing active sprint backlog, progress stages, and drag-and-drop task card transitions.',
+        },
+        {
+          step: '02',
+          title: 'Team Workload & Capacity',
+          detail: 'Monitoring individual team member utilization and task distribution across sprints.',
+        },
+        {
+          step: '03',
+          title: 'Analytics & Time Reports',
+          detail: 'Deriving sprint velocity, burn-down metrics, and billable hours from shared state.',
+        },
+      ],
+      ctaText: 'Explore Case Study',
+      hasScreenshots: true,
+      aspectRatio: '16/10',
+      visualSlots: {
+        primary: {
+          id: 'plotline-primary',
+          slot: 'primary',
+          label: 'Studio Management Dashboard',
+          src: '/src/assets/images/plotline_dashboard_preview_1792848057222.jpg',
+          alt: 'Plotline - Studio Management Workspace dashboard interface preview showing Kanban board and workload metrics',
+          caption: 'Main studio dashboard featuring Kanban board, workload allocation charts, and schedule timeline.',
+          status: 'screenshot',
+          frame: 'desktop',
+        },
+        workflow: {
+          id: 'plotline-workflow',
+          slot: 'workflow',
+          label: 'Analytics & Reporting Screen',
+          src: '/src/assets/images/plotline_analytics_preview_1792848069486.jpg',
+          alt: 'Plotline - Analytics and reporting interface preview with burn-down and time logs',
+          caption: 'Analytics screen tracking project velocity, task distribution, and time tracking logs.',
+          status: 'screenshot',
+          frame: 'desktop',
+        },
+      },
+    },
     {
       id: 'assured-capture',
       name: 'Assured Capture',

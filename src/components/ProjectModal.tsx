@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { X, CheckCircle2, ArrowRight, Info } from 'lucide-react';
+import { X, CheckCircle2, ArrowRight, Info, ExternalLink, Github } from 'lucide-react';
 import { ProjectData } from '../data/portfolioData';
 
 interface ProjectModalProps {
@@ -62,7 +62,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
       clearTimeout(timer);
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = originalStyle;
-      // Return focus to triggering button
       triggerRef.current?.focus();
     };
   }, [project, onClose]);
@@ -79,7 +78,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      {/* Outer dialog panel - keeps the single border */}
+      {/* Outer dialog panel */}
       <div
         ref={modalRef}
         className="relative w-full max-w-3xl rounded-[24px] border border-[rgba(197,198,199,0.12)] bg-[#1F2833] text-[#C5C6C7] shadow-[var(--shadow-3)] p-6 sm:p-8 my-8 max-h-[90vh] overflow-y-auto focus-ring"
@@ -102,14 +101,43 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           <button
             ref={closeButtonRef}
             onClick={onClose}
-            className="touch-target min-w-[44px] min-h-[44px] flex items-center justify-center rounded-[12px] text-[#C5C6C7] hover:text-[#66FCF1] hover:bg-[#0B0C10] transition-colors focus-ring focus-visible:outline-2 focus-visible:outline-[#66FCF1] cursor-pointer"
+            className="touch-target min-w-[44px] min-h-[44px] flex items-center justify-center rounded-[12px] text-[#C5C6C7] hover:text-[#66FCF1] hover:bg-[#0B0C10] transition-colors focus-ring cursor-pointer"
             aria-label="Close project details"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
-        {/* Content sections separated by 24-32px spacing and 1px dividers, no inner bordered boxes */}
+        {/* Action Links Bar if Live or Source available */}
+        {(project.liveUrl || project.sourceUrl) && (
+          <div className="flex flex-wrap items-center gap-3 mb-6 p-4 rounded-[16px] bg-[#0B0C10]/60 border border-[rgba(197,198,199,0.1)]">
+            <span className="text-xs font-mono text-[#C5C6C7]/80 mr-2">Explore Repository & Demo:</span>
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="touch-target inline-flex items-center gap-2 px-4 py-2 rounded-[10px] bg-[#66FCF1] text-[#0B0C10] font-['Barlow'] font-semibold text-sm hover:bg-[#66FCF1]/90 transition-colors focus-ring"
+              >
+                <span>Live Demo</span>
+                <ExternalLink className="w-4 h-4" aria-hidden="true" />
+              </a>
+            )}
+            {project.sourceUrl && (
+              <a
+                href={project.sourceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="touch-target inline-flex items-center gap-2 px-4 py-2 rounded-[10px] border border-[rgba(197,198,199,0.2)] bg-[#0B0C10] text-white font-['Barlow'] font-semibold text-sm hover:bg-[#1F2833] transition-colors focus-ring"
+              >
+                <span>Source Code</span>
+                <Github className="w-4 h-4" aria-hidden="true" />
+              </a>
+            )}
+          </div>
+        )}
+
+        {/* Content sections */}
         <div className="space-y-6 sm:space-y-8">
           
           {/* Section 1: Purpose & Overview */}
@@ -122,10 +150,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </p>
           </div>
 
-          {/* 1px divider */}
           <div className="border-t border-[rgba(197,198,199,0.12)]" role="separator" />
 
-          {/* Section 2: Owner Role & Technical Focus (No inner borders or filled background) */}
+          {/* Section 2: Owner Role & Technical Focus */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             <div>
               <span className="block text-xs font-mono uppercase tracking-wider text-[rgba(197,198,199,0.9)] mb-1.5">
@@ -145,15 +172,36 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </div>
           </div>
 
+          {/* Technology Stack if available */}
+          {project.technologies && (
+            <>
+              <div className="border-t border-[rgba(197,198,199,0.12)]" role="separator" />
+              <div>
+                <h4 className="text-xs font-mono uppercase tracking-wider text-[rgba(197,198,199,0.9)] mb-3">
+                  Technology Stack & Architecture
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, idx) => (
+                    <span
+                      key={idx}
+                      className="px-3 py-1.5 rounded-[10px] bg-[#0B0C10] border border-[rgba(197,198,199,0.15)] font-mono text-xs text-[#66FCF1]"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </>
+          )}
+
           {/* Section 3: Reported Features or Workflow Stages */}
           {project.reportedFeatures && (
             <>
               <div className="border-t border-[rgba(197,198,199,0.12)]" role="separator" />
               <div>
                 <h4 className="text-xs font-mono uppercase tracking-wider text-[rgba(197,198,199,0.9)] mb-4">
-                  Reported Prototype Capabilities
+                  Key Implemented Workflows & Capabilities
                 </h4>
-                {/* Capability list without inner boxes or borders */}
                 <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                   {project.reportedFeatures.map((feat, idx) => (
                     <li
@@ -176,7 +224,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
                 <h4 className="text-xs font-mono uppercase tracking-wider text-[rgba(197,198,199,0.9)] mb-4">
                   Workflow Hierarchy
                 </h4>
-                {/* Workflow rows: number plus title plus description, no box */}
                 <div className="space-y-4 sm:space-y-5">
                   {project.workflowStages.map((stage, idx) => (
                     <div
@@ -201,13 +248,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
             </>
           )}
 
-          {/* Section 4: Context Boundary Notice (No inner borders or filled background) */}
+          {/* Section 4: Status Verification Note */}
           <div className="border-t border-[rgba(197,198,199,0.12)]" role="separator" />
           <div className="flex items-start gap-3 sm:gap-4 text-sm text-[#C5C6C7]">
             <Info className="w-4 h-4 text-[#45A29E] shrink-0 mt-1" aria-hidden="true" />
             <div className="space-y-1">
               <span className="font-mono text-xs uppercase tracking-wider text-white font-medium block">
-                Status Verification Note
+                Architecture & Verification Note
               </span>
               <p className="font-['Barlow'] text-sm text-[#C5C6C7] leading-relaxed">
                 {project.contextNotes}
@@ -216,7 +263,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           </div>
         </div>
 
-        {/* Modal actions separated by divider */}
+        {/* Modal Actions */}
         <div className="mt-8 sm:mt-10 pt-6 border-t border-[rgba(197,198,199,0.12)] flex flex-wrap items-center justify-between gap-4">
           <span className="text-xs font-mono text-[rgba(197,198,199,0.85)]">
             {project.statusText}
