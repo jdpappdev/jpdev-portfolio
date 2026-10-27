@@ -31,7 +31,7 @@ export const Hero: React.FC = () => {
   return (
     <section
       id="hero"
-      className="relative min-h-[calc(100vh-1rem)] flex flex-col justify-center pt-[92px] sm:pt-[96px] md:pt-[100px] lg:pt-[104px] pb-10 sm:pb-12 md:pb-16 overflow-hidden scroll-mt-28"
+      className="relative min-h-[auto] sm:min-h-[calc(100vh-1rem)] flex flex-col justify-center pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-10 sm:pb-12 md:pb-16 overflow-hidden scroll-mt-28"
       aria-label="Introduction"
     >
       {/* HERO RIGHT SIDE ATMOSPHERE: Perspective Grid Plane & Horizon Light Bloom */}
