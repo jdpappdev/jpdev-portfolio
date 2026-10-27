@@ -191,10 +191,11 @@ export const PORTFOLIO_DATA = {
       description:
         'A digital product focused on organizing field-inspection workflows, documenting issues and evidence, and supporting structured reporting and review.',
       focus: 'Product workflows, interface structure, and practical application design.',
-      statusText: 'Case study in progress.',
-      statusBadge: 'Documentation In Progress',
+      statusText: 'Production-ready mobile web demo deployed at demo-assured-capture.netlify.app.',
+      statusBadge: 'Featured Project · Live Demo',
       contextNotes:
-        'The product is associated with field-inspection workflows, issues, evidence, and reporting. Presented as project context and architectural direction, not as proof that every feature is currently deployed.',
+        'The product is associated with field-inspection workflows, issues, evidence, and reporting. Fully interactive mobile web demo deployed and connected live.',
+      liveUrl: 'https://demo-assured-capture.netlify.app/',
       contribution:
         'Designed and built independently with AI assistance. Focused on mapping out multi-step inspection workflows, clear evidence capture states, and structured report summaries.',
       workflowStages: [
@@ -217,14 +218,7 @@ export const PORTFOLIO_DATA = {
       ctaText: 'Explore Project',
       hasScreenshots: false,
       aspectRatio: '16/10',
-      video: {
-        src: '/assets/projects/assured-capture-walkthrough.mp4',
-        poster: '/assets/projects/assured-capture-walkthrough-poster.svg',
-        title: 'Assured Capture, presentation video',
-        aspect: '1/1',
-        label: 'Presentation video featuring screens from the app',
-        description: 'Inspection report with an issues list, and issue details with photo evidence.',
-      },
+
       visualSlots: {
         primary: {
           id: 'ac-primary',
@@ -266,11 +260,12 @@ export const PORTFOLIO_DATA = {
       description:
         'A cross-platform working prototype designed to organize contact information, visit histories, territories, and follow-ups in one application.',
       focus: 'Contact management, connected records, location access, and practical workflows.',
-      statusText: 'Working prototype with reported functionality across core record-management features.',
-      statusBadge: 'Working Prototype',
+      statusText: 'Fully interactive live mobile web demo deployed at demo-contact-record.netlify.app.',
+      statusBadge: 'Featured Project · Live Demo',
       contextNotes:
-        'These feature areas are reported as implemented or demonstrable in prototype testing. Presented accurately without added commercial or production-readiness claims.',
+        'Fully interactive live mobile web demo deployed at demo-contact-record.netlify.app. Features contact profiles, visit records, territory organization, and follow-up tracking.',
       contribution: 'Designed and built independently with AI assistance.',
+      liveUrl: 'https://demo-contact-record.netlify.app/',
       reportedFeatures: [
         'Contact profiles and photos',
         'Visit records and conversation notes',
@@ -283,14 +278,7 @@ export const PORTFOLIO_DATA = {
       ctaText: 'Explore Project',
       hasScreenshots: false,
       aspectRatio: '16/10',
-      video: {
-        src: '/assets/projects/deaf-contact-record-walkthrough.mp4',
-        poster: '/assets/projects/deaf-contact-record-walkthrough-poster.svg',
-        title: 'Deaf Contact Record, presentation video',
-        aspect: '1/1',
-        label: 'Presentation video featuring screens from the app',
-        description: 'Contact list with filter and search, and a territory map with pins.',
-      },
+
       visualSlots: {
         primary: {
           id: 'dcr-primary',

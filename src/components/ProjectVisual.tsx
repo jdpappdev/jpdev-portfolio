@@ -155,6 +155,73 @@ export const ProjectVisual: React.FC<ProjectVisualProps> = ({ project, className
   const internalHeight = 720;
   const scale = containerWidth > 0 ? containerWidth / internalWidth : 1;
 
+  if (project.id === 'assured-capture' || project.id === 'deaf-contact-record') {
+    const isAssured = project.id === 'assured-capture';
+    const demoUrl = isAssured ? 'https://demo-assured-capture.netlify.app/' : 'https://demo-contact-record.netlify.app/';
+    const iframeTitle = isAssured ? 'Live Assured Capture mobile demo' : 'Live Deaf Contact Record demo';
+    const loadingName = isAssured ? 'Assured Capture' : 'Deaf Contact Record';
+    const linkText = isAssured ? 'Open Assured Capture demo' : 'Open Deaf Contact Record demo';
+    const domainText = isAssured ? 'demo-assured-capture.netlify.app' : 'demo-contact-record.netlify.app';
+
+    return (
+      <div className={`w-full max-w-[320px] sm:max-w-[340px] mx-auto space-y-3 ${className}`}>
+        <div className="text-xs font-mono uppercase tracking-wider text-[var(--text)] opacity-90 flex items-center justify-between">
+          <span>Live Mobile Demo</span>
+          <a
+            href={project.liveUrl || demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#66FCF1] hover:underline flex items-center gap-1 font-semibold normal-case text-xs focus-ring"
+            aria-label={`Open ${linkText} in a new tab`}
+          >
+            {linkText} <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+          </a>
+        </div>
+
+        {/* Smartphone Bezel Frame */}
+        <div className="relative rounded-[40px] bg-[#1a1b1e] p-3.5 border-4 border-[#2c2d32] shadow-[var(--shadow-3)] shadow-black/50 overflow-hidden">
+          {/* Speaker / Camera Notch Detail */}
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-28 h-4 bg-[#0B0C10] rounded-full z-20 flex items-center justify-center pointer-events-none">
+            <div className="w-10 h-1.5 bg-[#2c2d32] rounded-full" />
+          </div>
+
+          {/* Inner Screen Container (9:19.5 aspect ratio) */}
+          <div className="relative w-full aspect-[9/19.5] rounded-[30px] bg-[#0B0C10] overflow-hidden border border-white/10 shadow-inner">
+            {!iframeLoaded && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-[#0B0C10] z-10 space-y-3">
+                <div className="w-6 h-6 border-2 border-[#66FCF1] border-t-transparent rounded-full animate-spin" />
+                <span className="font-mono text-xs text-[#C5C6C7]">Loading {loadingName}...</span>
+              </div>
+            )}
+            <iframe
+              src={project.liveUrl || demoUrl}
+              title={iframeTitle}
+              loading="lazy"
+              onLoad={() => setIframeLoaded(true)}
+              className="w-full h-full border-0 bg-white"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-modals"
+            />
+          </div>
+
+          {/* Home indicator bar at bottom */}
+          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-white/30 rounded-full pointer-events-none z-20" />
+        </div>
+
+        <p className="font-['Barlow'] text-xs text-[var(--text)] opacity-80 leading-relaxed flex items-center justify-between">
+          <span>Fully interactive live mobile web demo deployed at {domainText}.</span>
+          <a
+            href={project.liveUrl || demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[#66FCF1] sm:hidden font-mono text-[11px] inline-flex items-center gap-1 hover:underline"
+          >
+            Open Demo <ExternalLink className="w-3 h-3" aria-hidden="true" />
+          </a>
+        </p>
+      </div>
+    );
+  }
+
   if (isPlotline) {
     return (
       <div className={`w-full max-w-[620px] mx-auto space-y-3 ${className}`}>
