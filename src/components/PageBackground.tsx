@@ -46,7 +46,12 @@ export const PageBackground: React.FC = () => {
           maskImage: 'radial-gradient(ellipse at 65% 38%, #000 25%, transparent 78%)',
         }}
       />
-
+      {/* Flowing cyan and teal light streams */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="light-stream light-stream-1" />
+        <div className="light-stream light-stream-2" />
+        <div className="light-stream light-stream-3" />
+      </div>
       {/* 2. Blurred Radial Glows with slow transform drift and 0.1x scroll parallax */}
       <div ref={glowWrapperRef} className="absolute inset-0 transition-transform duration-75 ease-out will-change-transform">
         {/* Glow A: large radial (~900px), rgba(102, 252, 241, 0.16), centered behind right end of headline */}
