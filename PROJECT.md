@@ -3,15 +3,15 @@
 ## What it is
 A portfolio site for Jade Polo, positioned as a **Frontend Developer** (independent Digital Product Designer & Builder). Showcases app idea blueprints, services, and real project case studies.
 
-Hero line: "Your idea. Your workflow. A practical digital solution."
-CTAs: "I have an app idea" / "I need a business solution"
+Hero line: "From real-world problems to practical digital products."
+CTAs: "Explore My Projects" / "Let's Work Together"
 
 ## Tech stack (do not change)
 - React + TypeScript + Tailwind CSS + Vite
 - Deployed on Vercel (free tier)
 - Source of truth: this GitHub repo
 - Do NOT migrate to Next.js or any other framework.
-- Motion: Framer Motion (add if not already installed)
+- Motion: use the existing `motion` package; do not add a second animation library.
 
 ## Design system
 - Dark charcoal background with a teal accent
@@ -23,10 +23,10 @@ CTAs: "I have an app idea" / "I need a business solution"
 ## Sections
 1. Hero
 2. Services: App Idea Blueprint, UI/UX & Product Design, Custom Web Applications, Workflow & Report Automation, App Improvement
-3. Featured projects: Assured Capture (field-inspection documentation platform), Deaf Contact Record. Each uses a self-hosted walkthrough video (~5MB MP4 from real app screens), not concept images.
-4. Process: Understand the problem → Define requirements and scope → Design the experience → Build the solution → Test, refine, prepare for delivery
-5. Audiences: Personal apps, Business solutions (small teams)
-6. Contact
+3. Featured projects: Plotline, Assured Capture, and Deaf Contact Record. Use real product screens or live demos, and clearly identify seeded sample data; do not use generated concept visuals as product evidence.
+4. Skills & tools
+5. Process: Understand → Plan → Build → Test → Refine
+6. About and contact
 
 ## Content rules
 - Only real, verifiable content. No fake testimonials, stats, clients, or results.
@@ -36,15 +36,16 @@ CTAs: "I have an app idea" / "I need a business solution"
   - LinkedIn: https://www.linkedin.com/in/jade-polo-a46833411
 
 ## Current status
-- Deployed on Vercel and nearly production-ready
-- Project videos in place for Deaf Contact Record and Assured Capture
-- In final UI refinement: 3D/layered depth feel, trendy animation that fits the dark-teal blueprint style
+- Public Vercel deployment is reachable; the visual direction is the dark, teal-accented Blueprint system.
+- Portfolio content, metadata, and contact links were aligned on 2026-11-17.
+- Plotline is shown as a client-side demo with seeded sample data and browser persistence.
+- Assured Capture and Deaf Contact Record have live interactive previews; their project detail image slots still need verified screenshots or walkthrough media.
 
 ## Next steps
-1. Overall UI improvements and animation pass
-2. Replace any remaining placeholder screenshots/visuals
-3. Mobile layout check and Lighthouse run (performance, accessibility, SEO)
-4. Custom domain (optional)
+1. Replace remaining placeholder project-detail visuals with verified app screenshots or walkthrough clips.
+2. Review mobile layouts and run Lighthouse for performance, accessibility, and SEO.
+3. Update the GitHub repository homepage field to the canonical Lemon Vercel URL.
+4. Consider a custom domain (optional).
 
 ## Rules for AI tools
 - Read this file first before making changes.
@@ -58,4 +59,4 @@ CTAs: "I have an app idea" / "I need a business solution"
 Google AI Studio → GitHub → v0 (UI work, on a separate branch) → back to AI Studio. Always pull the latest repo before editing in any tool. Commit after every working change.
 
 ## Last updated
-(update the date and the Current status section after each session)
+2026-11-17

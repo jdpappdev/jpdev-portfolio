@@ -72,7 +72,7 @@ export interface ProcessStep {
 
 export const CONTACT_DETAILS = {
   email: (import.meta.env?.VITE_CONTACT_EMAIL as string) || 'jdpolo.1218@gmail.com',
-  linkedin: (import.meta.env?.VITE_LINKEDIN_URL as string) || 'https://linkedin.com/in/jade-polo',
+  linkedin: (import.meta.env?.VITE_LINKEDIN_URL as string) || 'https://www.linkedin.com/in/jade-polo-a46833411',
   github: (import.meta.env?.VITE_GITHUB_URL as string) || 'https://github.com/jdpappdev',
 };
 
@@ -115,8 +115,8 @@ export const PORTFOLIO_DATA = {
       description:
         'A project management workspace connecting tasks, schedules, team workload, and focus-time analytics through one consistent, data-driven interface.',
       focus: 'Frontend architecture, state management with Zustand, drag-and-drop Kanban boards, performance analytics, and browser persistence.',
-      statusText: 'Production-ready working client app with comprehensive unit and E2E test coverage.',
-      statusBadge: 'Featured Project · Live Demo',
+      statusText: 'Functional client-side demo with sample data and browser persistence.',
+      statusBadge: 'Featured Project · Sample Data Demo',
       contextNotes:
         'Built with React, TypeScript, Tailwind CSS, Zustand, Vitest, and Playwright. Fully functional client-side workspace featuring realistic seeded demo data and persistent browser storage.',
       contribution:
