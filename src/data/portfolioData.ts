@@ -111,16 +111,16 @@ export const PORTFOLIO_DATA = {
       id: 'plotline',
       name: 'Plotline',
       tagline: 'Studio Management Workspace',
-      category: 'Studio Management & Project Workspace',
+      category: 'Planning & Team Operations',
       description:
-        'A project management workspace connecting tasks, schedules, team workload, and focus-time analytics through one consistent, data-driven interface.',
-      focus: 'Frontend architecture, state management with Zustand, drag-and-drop Kanban boards, performance analytics, and browser persistence.',
-      statusText: 'Functional client-side demo with sample data and browser persistence.',
+        'Plan sprint tasks, balance team assignments, manage schedules, and review focus time and velocity from one dashboard.',
+      focus: 'React and TypeScript architecture, Zustand state, drag-and-drop interactions, and browser storage.',
+      statusText: 'Functional client-side demo with seeded records.',
       statusBadge: 'Featured Project · Sample Data Demo',
       contextNotes:
-        'Built with React, TypeScript, Tailwind CSS, Zustand, Vitest, and Playwright. Fully functional client-side workspace featuring realistic seeded demo data and persistent browser storage.',
+        'The demo uses seeded records; changes persist in browser storage.',
       contribution:
-        'Designed and built independently with AI assistance. Implemented the complete interface architecture, reactive state management, interactive Kanban board, team workload allocation, focus timer, and analytics reporting.',
+        'Independently designed and implemented the frontend with AI-assisted iteration.',
       liveUrl: 'https://plotline-phi.vercel.app/',
       sourceUrl: 'https://github.com/jdpappdev/Plotline',
       technologies: [
@@ -144,18 +144,18 @@ export const PORTFOLIO_DATA = {
       workflowStages: [
         {
           step: '01',
-          title: 'Task & Kanban Tracking',
-          detail: 'Managing active sprint backlog, progress stages, and drag-and-drop task card transitions.',
+          title: 'Sprint Board',
+          detail: 'Move backlog items through stages with drag and drop.',
         },
         {
           step: '02',
-          title: 'Team Workload & Capacity',
-          detail: 'Monitoring individual team member utilization and task distribution across sprints.',
+          title: 'Team Capacity',
+          detail: 'Compare assignments across people and sprints.',
         },
         {
           step: '03',
-          title: 'Analytics & Time Reports',
-          detail: 'Deriving sprint velocity, burn-down metrics, and billable hours from shared state.',
+          title: 'Time & Analytics',
+          detail: 'Review sprint velocity, burn-down, and logged work.',
         },
       ],
       ctaText: 'Explore Project',
@@ -189,30 +189,30 @@ export const PORTFOLIO_DATA = {
       name: 'Assured Capture',
       category: 'Field Inspection & Reporting',
       description:
-        'A digital product focused on organizing field-inspection workflows, documenting issues and evidence, and supporting structured reporting and review.',
-      focus: 'Product workflows, interface structure, and practical application design.',
-      statusText: 'Production-ready mobile web demo deployed at demo-assured-capture.netlify.app.',
+        'A mobile inspection tool for setting scope in the field, documenting defects with photo and location evidence, and preparing reviewable reports.',
+      focus: 'Mobile layout and multi-step field capture.',
+      statusText: 'Deployed mobile web demo; preview opens at sign-in.',
       statusBadge: 'Featured Project · Live Demo',
       contextNotes:
-        'The product is associated with field-inspection workflows, issues, evidence, and reporting. Fully interactive mobile web demo deployed and connected live.',
+        'The deployed preview currently opens at the sign-in screen.',
       liveUrl: 'https://demo-assured-capture.netlify.app/',
       contribution:
-        'Designed and built independently with AI assistance. Focused on mapping out multi-step inspection workflows, clear evidence capture states, and structured report summaries.',
+        'Mapped and implemented the inspection flow, with clear states for evidence capture and report review.',
       workflowStages: [
         {
           step: '01',
-          title: 'Field Setup & Inspection Scoping',
-          detail: 'Configuring property or asset inspection parameters before on-site capture begins.',
+          title: 'Set inspection scope',
+          detail: 'Choose a property or asset and define its parameters.',
         },
         {
           step: '02',
-          title: 'Evidence & Issue Logging',
-          detail: 'Documenting identified anomalies with location coordinates, photo proof, and categorized tags.',
+          title: 'Record findings',
+          detail: 'Attach location, photos, and a category to each issue.',
         },
         {
           step: '03',
-          title: 'Verification & Structured Export',
-          detail: 'Compiling findings into standardized, verifiable summaries for auditing and client review.',
+          title: 'Prepare a report',
+          detail: 'Compile findings into a structured summary for review.',
         },
       ],
       ctaText: 'Explore Project',
@@ -258,13 +258,13 @@ export const PORTFOLIO_DATA = {
       tagline: 'Organize. Connect. Serve.',
       category: 'Contact & Ministry Organization',
       description:
-        'A cross-platform working prototype designed to organize contact information, visit histories, territories, and follow-ups in one application.',
-      focus: 'Contact management, connected records, location access, and practical workflows.',
-      statusText: 'Fully interactive live mobile web demo deployed at demo-contact-record.netlify.app.',
+        'A cross-platform prototype for coordinating contact profiles, visit history, territory assignments, and follow-ups.',
+      focus: 'Connected records, map access, and cross-device sharing.',
+      statusText: 'Interactive mobile web demo.',
       statusBadge: 'Featured Project · Live Demo',
       contextNotes:
-        'Fully interactive live mobile web demo deployed at demo-contact-record.netlify.app. Features contact profiles, visit records, territory organization, and follow-up tracking.',
-      contribution: 'Designed and built independently with AI assistance.',
+        'The live demo includes Contacts, Territories, Map, and Settings views.',
+      contribution: 'Designed and built the prototype around contact records and territory-based follow-ups.',
       liveUrl: 'https://demo-contact-record.netlify.app/',
       reportedFeatures: [
         'Contact profiles and photos',
